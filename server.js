@@ -166,5 +166,8 @@ async function seed() {
 
 mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/kiit_clothings')
   .then(seed)
-  .then(() => app.listen(process.env.PORT || 3000, () => console.log('KIIT CLOTHINGS running on http://localhost:' + (process.env.PORT || 3000))))
-  .catch(e => { console.error('Could not start. Is MongoDB running?\n', e.message); process.exit(1); });
+  .then(() => app.listen(process.env.PORT || 3000, () => console.log('KIIT CLOTHINGS running')))
+  .catch(e => {
+    console.error('Could not start. Is MongoDB running?\n', e.message);
+    process.exit(1);
+  });
