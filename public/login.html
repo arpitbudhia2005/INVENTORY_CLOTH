@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign in | KIIT CLOTHINGS</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="login">
+  <div class="art"><h1>KIIT CLOTHINGS</h1><p>Stock, billing and sales for the shop floor.</p></div>
+  <form class="box" id="f">
+    <h2>Sign in</h2><span style="color:var(--mute)">Only the shop owner can open the dashboard.</span>
+    <label for="u">Username</label><input id="u" autocomplete="username" required>
+    <label for="p">Password</label><input id="p" type="password" autocomplete="current-password" required>
+    <div class="err" id="e"></div>
+    <button class="btn">Sign in</button>
+  </form></div>
+<script>
+if(localStorage.getItem('kc_token')) location.href='/';
+f.onsubmit=async ev=>{ev.preventDefault();e.textContent='';
+  const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u.value,password:p.value})});
+  const d=await r.json(); if(!r.ok){e.textContent=d.error;return}
+  localStorage.setItem('kc_token',d.token); location.href='/';};
+</script></body></html>

@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KIIT CLOTHINGS</title><link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script></head>
+<body><div class="shell">
+<aside><div class="brand">KIIT CLOTHINGS<small>Inventory manager</small></div>
+<nav id="nav">
+  <button data-v="dash" class="on">Dashboard</button><button data-v="inv">Inventory</button>
+  <button data-v="bill">Billing</button><button data-v="refill">Refill stock</button><button data-v="sales">Sales history</button>
+</nav><button class="btn ghost out" onclick="logout()">Sign out</button></aside>
+<main>
+<section class="view on" id="dash"><h1>Dashboard</h1>
+  <div class="kpis" id="kpis"></div>
+  <div class="grid2">
+    <div class="card"><h3>Sales by season</h3><div class="chart"><canvas id="cSeason"></canvas></div></div>
+    <div class="card"><h3>Sales by gender</h3><div class="chart"><canvas id="cGender"></canvas></div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>Sizes: sold vs in stock</h3><div class="chart"><canvas id="cSize"></canvas></div></div>
+    <div class="card"><h3>Sales by colour</h3><div class="chart"><canvas id="cColour"></canvas></div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>Most selling products</h3><div id="top"></div></div>
+    <div class="card"><h3>Sales by category</h3><div class="chart"><canvas id="cCat"></canvas></div></div>
+  </div>
+  <div class="card"><h3>Low stock by size</h3><p class="hint" id="lowHint"></p><div class="sizes" id="low"></div></div>
+</section>
+
+<section class="view" id="inv"><h1>Inventory</h1>
+  <div class="filters"><input id="q" placeholder="Search product or colour"><select id="g"><option value="">All genders</option><option>Men</option><option>Women</option><option>Unisex</option></select></div>
+  <div class="card scroll"><table><thead><tr><th>Product</th><th>Gender</th><th>Colour</th><th>Season</th><th>Small</th><th>Medium</th><th>Large</th><th>Price</th><th>Sold</th></tr></thead><tbody id="invBody"></tbody></table></div>
+</section>
+
+<section class="view" id="bill"><h1>Billing</h1>
+  <div class="bill"><div class="products" id="pgrid"></div>
+  <div class="card cart"><h3>Customer bill</h3>
+    <label for="cn">Customer name</label><input id="cn" autocomplete="off">
+    <label for="cp">Phone number</label><input id="cp" inputmode="numeric" maxlength="10" placeholder="10 digits" autocomplete="off">
+    <div id="cart" style="margin-top:.8rem"></div>
+    <div class="tot"><span>Total</span><span id="tot">₹0.00</span></div>
+    <div class="err" id="be"></div>
+    <button class="btn" style="width:100%" id="gen">Generate bill</button>
+  </div></div>
+</section>
+
+<section class="view" id="refill"><h1>Refill stock</h1>
+  <div class="card form"><label for="rp">Product</label><select id="rp"></select>
+    <label for="rs">Size</label><select id="rs"><option value="S">Small</option><option value="M">Medium</option><option value="L">Large</option></select>
+    <label for="rq">Quantity received</label><input id="rq" type="number" min="1" value="10">
+    <div class="err" id="re"></div><button class="btn" id="rb">Add to stock</button><div class="msg" id="rm"></div></div>
+</section>
+
+<section class="view" id="sales"><h1>Sales history</h1>
+  <div class="card scroll"><table><thead><tr><th>Invoice</th><th>Date</th><th>Customer</th><th>Phone</th><th>Items</th><th>Total</th></tr></thead><tbody id="sBody"></tbody></table></div>
+</section>
+</main></div>
+
+<div class="modal" id="modal"><div class="inv" id="invoice"></div></div>
+<script src="app.js"></script></body></html>
